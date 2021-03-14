@@ -24,7 +24,7 @@ type nested struct {
 }
 
 func (n *nested) Render() app.UI {
-	return app.H3().Text(n.nestedName)
+	return app.H3().Body(app.Text("nested: "), app.Text(n.nestedName))
 }
 
 // The Render method is where the component appearance is defined. Here, a
@@ -32,11 +32,13 @@ func (n *nested) Render() app.UI {
 func (h *hello) Render() app.UI {
 	return app.Div().Body(
 		app.H1().Text("Hello World!"),
-		app.H2().Text(h.name),
+		app.H2().Body(app.Text("top-level: "), app.Text(h.name)),
 		&nested{nestedName: h.name},
 		app.Input().
 			Value(h.name).
-			OnChange(h.OnInputChange))
+			OnChange(h.OnInputChange),
+		app.Text("Type something and press enter"),
+	)
 }
 
 func (h *hello) OnInputChange(ctx app.Context, e app.Event) {
