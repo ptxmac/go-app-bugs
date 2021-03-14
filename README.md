@@ -2,15 +2,21 @@
 
 Tiny demonstration of a nesten component update problem
 
-
 ## Usage
 
 ```shell
-GOARCH=wasm GOOS=js go build -o web/app.wasm
+env GOARCH=wasm GOOS=js go build -o web/app.wasm
 go run main.go
 ```
 
 Open http://localhost:8000
+
+### Run tests
+
+```shell
+go get github.com/agnivade/wasmbrowsertest
+env GOOS=js GOARCH=wasm go test -exec wasmbrowsertest
+```
 
 ## Issue
 
