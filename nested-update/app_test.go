@@ -22,16 +22,16 @@ func TestNested_Render(t *testing.T) {
 	}
 	t.Run("initial state", func(t *testing.T) {
 		require.NoError(t, app.TestMatch(
-			h.Render(),
+			h,
 			app.TestUIDescriptor{
-				Path:     app.TestPath(1, 0),
+				Path:     app.TestPath(0, 1, 0),
 				Expected: app.Text("top-level: start"),
 			},
 		))
 		require.NoError(t, app.TestMatch(
-			h.Render(),
+			h,
 			app.TestUIDescriptor{
-				Path:     app.TestPath(2, 0, 0),
+				Path:     app.TestPath(0, 2, 0, 0),
 				Expected: app.Text("nested: start"),
 			},
 		))
@@ -40,16 +40,16 @@ func TestNested_Render(t *testing.T) {
 	h.Update()
 	t.Run("updated state", func(t *testing.T) {
 		require.NoError(t, app.TestMatch(
-			h.Render(),
+			h,
 			app.TestUIDescriptor{
-				Path:     app.TestPath(1, 0),
+				Path:     app.TestPath(0, 1, 0),
 				Expected: app.Text("top-level: end"),
 			},
 		))
 		require.NoError(t, app.TestMatch(
-			h.Render(),
+			h,
 			app.TestUIDescriptor{
-				Path:     app.TestPath(2, 0, 0),
+				Path:     app.TestPath(0, 2, 0, 0),
 				Expected: app.Text("nested: end"),
 			},
 		))
