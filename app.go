@@ -1,4 +1,4 @@
-// // +build wasm
+// +build wasm
 
 // The UI is running only on a web browser. Therefore, the build instruction
 // above is to compile the code below only when the program is built for the
@@ -24,7 +24,7 @@ type nested struct {
 }
 
 func (n *nested) Render() app.UI {
-	return app.H3().Body(app.Text("nested: "), app.Text(n.nestedName))
+	return app.H3().Body(app.Text("nested: " + n.nestedName))
 }
 
 // The Render method is where the component appearance is defined. Here, a
@@ -32,7 +32,7 @@ func (n *nested) Render() app.UI {
 func (h *hello) Render() app.UI {
 	return app.Div().Body(
 		app.H1().Text("Hello World!"),
-		app.H2().Body(app.Text("top-level: "), app.Text(h.name)),
+		app.H2().Body(app.Text("top-level: "+h.name)),
 		&nested{nestedName: h.name},
 		app.Input().
 			Value(h.name).
