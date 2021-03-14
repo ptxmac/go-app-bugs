@@ -18,7 +18,7 @@ func TestNested_Render(t *testing.T) {
 	testSkipNonWasm(t)
 
 	h := &hello{
-		name: "start",
+		Name: "start",
 	}
 	t.Run("initial state", func(t *testing.T) {
 		require.NoError(t, app.TestMatch(
@@ -36,7 +36,7 @@ func TestNested_Render(t *testing.T) {
 			},
 		))
 	})
-	h.name = "end"
+	h.Name = "end"
 	h.Update()
 	t.Run("updated state", func(t *testing.T) {
 		require.NoError(t, app.TestMatch(

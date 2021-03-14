@@ -14,17 +14,17 @@ import "github.com/maxence-charriere/go-app/v7/pkg/app"
 type hello struct {
 	app.Compo
 
-	name string
+	Name string
 }
 
 type nested struct {
 	app.Compo
 
-	nestedName string
+	NestedName string
 }
 
 func (n *nested) Render() app.UI {
-	return app.H3().Body(app.Text("nested: " + n.nestedName))
+	return app.H3().Body(app.Text("nested: " + n.NestedName))
 }
 
 // The Render method is where the component appearance is defined. Here, a
@@ -32,17 +32,17 @@ func (n *nested) Render() app.UI {
 func (h *hello) Render() app.UI {
 	return app.Div().Body(
 		app.H1().Text("Hello World!"),
-		app.H2().Body(app.Text("top-level: "+h.name)),
-		&nested{nestedName: h.name},
+		app.H2().Body(app.Text("top-level: "+h.Name)),
+		&nested{NestedName: h.Name},
 		app.Input().
-			Value(h.name).
+			Value(h.Name).
 			OnChange(h.OnInputChange),
 		app.Text("Type something and press enter"),
 	)
 }
 
 func (h *hello) OnInputChange(ctx app.Context, e app.Event) {
-	h.name = ctx.JSSrc.Get("value").String()
+	h.Name = ctx.JSSrc.Get("value").String()
 	h.Update()
 }
 
@@ -50,7 +50,7 @@ func (h *hello) OnInputChange(ctx app.Context, e app.Event) {
 // associated with URL paths and where the UI is started.
 func main() {
 	app.Route("/", &hello{
-		name: "start value",
+		Name: "start value",
 	})        // hello component is associated with URL path "/".
 	app.Run() // Launches the PWA.
 }
